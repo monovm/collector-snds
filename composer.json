@@ -1,7 +1,6 @@
 {
     "name": "monovm/collector-snds",
     "description": "Collector addon for handling notifications from Microsoft SNDS",
-    "version": "5.0.0",
     "keywords": ["laravel", "abuseio", "parser", "snds"],
     "homepage": "http://abuse.io",
     "type": "library",
