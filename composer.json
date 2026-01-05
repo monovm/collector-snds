@@ -1,5 +1,5 @@
 {
-    "name": "abuseio/collector-snds",
+    "name": "monovm/collector-snds",
     "description": "Collector addon for handling notifications from Microsoft SNDS",
     "version": "5.0.0",
     "keywords": ["laravel", "abuseio", "parser", "snds"],
@@ -23,11 +23,13 @@
     },
     "require": {
         "php": ">=8.4.0",
-        "abuseio/collector-common": "5.0.* || dev-master"
+        "monovm/collector-common": "5.0.* || dev-master",
+        "league/csv": "^9.0",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "autoload": {
         "psr-4": {
-            "AbuseIO\\Collectors\\Snds\\": "src/"
+            "AbuseIO\\Collectors\\": "src/"
         }
     }
 }

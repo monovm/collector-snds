@@ -4,8 +4,7 @@ namespace AbuseIO\Collectors;
 
 use AbuseIO\Models\Incident;
 use GuzzleHttp;
-use Ddeboer\DataImport\Reader;
-use SplFileObject;
+use League\Csv\Reader;
 
 /**
  * Class Snds
@@ -70,25 +69,17 @@ class Snds extends Collector
             "{$this->url}?key={$this->key}",
             [
                 'http_errors' => false,
-                'save_to' => $tempFile
+                'sink' => $tempFile
             ]
         );
         if ($res->getStatusCode() !== 200) {
             return $this->failed("URL collection from {$this->url} resulted in a {$res->getStatusCode()}");
         }
 
-        $csvReports = new Reader\CsvReader(new SplFileObject($tempFile));
-        $csvReports->setColumnHeaders(
-            [
-                'first_ip',
-                'last_ip',
-                'blocked',
-                'feed',
-            ]
-        );
+        $csvReports = Reader::createFromPath($tempFile, 'r');
+        $header = ['first_ip', 'last_ip', 'blocked', 'feed'];
 
-
-        foreach ($csvReports as $report) {
+        foreach ($csvReports->getRecords($header) as $report) {
             $this->feedName = 'unknown';
 
             // If report type is an alias, get the real type
