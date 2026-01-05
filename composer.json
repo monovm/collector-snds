@@ -22,7 +22,7 @@
     },
     "require": {
         "php": ">=8.4.0",
-        "monovm/collector-common": "5.0.* || dev-master",
+        "monovm/collector-common": "^5.0 || dev-master",
         "league/csv": "^9.0",
         "guzzlehttp/guzzle": "^7.0"
     },
